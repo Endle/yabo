@@ -11,6 +11,11 @@
   <title></title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+      {{message}}
+  </div>
+  <div id="loadDir">
+    <input type="file" @change="loadBeancount" multiple>
+  </div>
 </body>
 </html>

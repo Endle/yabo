@@ -1,9 +1,25 @@
+ /* eslint-disable */
 import Vue from 'vue'
-import App from '@/components/App'
+// import App from '@/components/App'
 
 new Vue({ // eslint-disable-line no-new
   el: '#app',
-  render: h => h(App)
+  data: {
+    message: 'Hello Vue!' + new Date().toLocaleString()
+  } // ,
+    // render: h => h(App)
+})
+
+new Vue({ // eslint-disable-line no-new
+    methods: {
+        loadBeancount(event) {
+            console.log(event.target.files);
+        },
+    },
+  el: '#loadDir',
+  data: {
+    message: 'a Hello Vue!' + new Date().toLocaleString()
+  }
 })
 
 if (__DEV__) {
