@@ -14,15 +14,12 @@ export default class AccountLoader {
     process() {
         for (var i=0; i<this.files.length; ++i) {
             let file = this.files[i];
-            console.log(file);
+            this.fetchFileText(file, this);
         }
     }
 
-    //https://stackoverflow.com/a/52947649/1166518
 
     /*
-    function splitLines(t) { return t.split(/\r\n|\r|\n/); }
-
     const removeCurrency = function(s) {
         return s.trim().replace(new RegExp('USD$'), '').trim();
     }
@@ -39,22 +36,26 @@ export default class AccountLoader {
         var account = removeCurrency(accountRaw);
         console.log(account);
     }
+        */
 
-    const processLocalBeancountRecord = function(records) {
-        let lines = splitLines(records);
-        for (var i=0,len=records.length; i<len; i++) {
-            processLocalBeancountRecordSingleLine(lines[i]);
+    //https://stackoverflow.com/a/52947649/1166518
+    static splitLines(t) { return t.split(/\r\n|\r|\n/); }
+
+    processLocalBeancountRecord = async (records) => {
+        let lines = AccountLoader.splitLines(records);
+        for (var i=0,len=lines.length; i<len; i++) {
+            console.log(lines[i]);
+            /*processLocalBeancountRecordSingleLine(lines[i]);*/
         }
     }
 
-    const fetchFileText = async file => {
+    fetchFileText = async (file, loader) => {
         let fr = new FileReader();
         fr.onload=function() {
-            processLocalBeancountRecord(fr.result);
+            loader.processLocalBeancountRecord(fr.result);
         }
         fr.readAsText(file);
     }
-        */
 
 }
 
