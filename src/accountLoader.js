@@ -19,12 +19,11 @@ export default class AccountLoader {
     }
 
 
-    /*
-    const removeCurrency = function(s) {
+    static removeCurrency(s) {
         return s.trim().replace(new RegExp('USD$'), '').trim();
     }
 
-    const processLocalBeancountRecordSingleLine = function(record) {
+    processLocalBeancountRecordSingleLine(record) {
         if (!record) {
             return;
         }
@@ -33,26 +32,24 @@ export default class AccountLoader {
             return;
         }
         var accountRaw = record.substr(pos + 4);
-        var account = removeCurrency(accountRaw);
+        var account = AccountLoader.removeCurrency(accountRaw);
         console.log(account);
     }
-        */
 
     //https://stackoverflow.com/a/52947649/1166518
     static splitLines(t) { return t.split(/\r\n|\r|\n/); }
 
-    processLocalBeancountRecord = async (records) => {
+    processLocalBeancountRecord = async (records, loader) => {
         let lines = AccountLoader.splitLines(records);
         for (var i=0,len=lines.length; i<len; i++) {
-            console.log(lines[i]);
-            /*processLocalBeancountRecordSingleLine(lines[i]);*/
+            loader.processLocalBeancountRecordSingleLine(lines[i]);
         }
     }
 
     fetchFileText = async (file, loader) => {
         let fr = new FileReader();
         fr.onload=function() {
-            loader.processLocalBeancountRecord(fr.result);
+            loader.processLocalBeancountRecord(fr.result, loader);
         }
         fr.readAsText(file);
     }
