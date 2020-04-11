@@ -1,0 +1,3 @@
+[submodule "static/arboreal"]
+	path = static/arboreal
+	url = https://github.com/afiore/arboreal.git

@@ -2,13 +2,25 @@
 // security.fileuri.strict_origin_policy
 // No need to be true/false
 import Vue from 'vue'
+import Arboreal from '@/../static/arboreal/lib/arboreal.js'
+
 // import App from '@/components/App'
+//
+// tree structure works
+var tree = new Arboreal()
+tree
+  .appendChild("Expense")
+  .appendChild()
+  .children[0]
+     .appendChild()
+     .appendChild();
 
 new Vue({ // eslint-disable-line no-new
   el: '#app',
   data: {
-    message: 'Hello Vue!' + new Date().toLocaleString()
+    message: 'Hello Vue!' + new Date().toLocaleString() + tree.toString()
   } // ,
+
     // render: h => h(App)
 })
 
