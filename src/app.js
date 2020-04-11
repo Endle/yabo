@@ -2,23 +2,17 @@
 // security.fileuri.strict_origin_policy
 // No need to be true/false
 import Vue from 'vue'
-import Arboreal from '@/../static/arboreal/lib/arboreal.js'
-
+/*import Arboreal from '@/../static/arboreal/lib/arboreal.js'*/
+import Immutable from 'immutable'
 // import App from '@/components/App'
 //
 // tree structure works
-var tree = new Arboreal()
-tree
-  .appendChild("Expense")
-  .appendChild()
-  .children[0]
-     .appendChild()
-     .appendChild();
+var map1 = Immutable.Map({ a: 1, b: 2, c: 3 });
 
 new Vue({ // eslint-disable-line no-new
   el: '#app',
   data: {
-    message: 'Hello Vue!' + new Date().toLocaleString() + tree.toString()
+    message: 'Hello Vue!' + new Date().toLocaleString() + map1.get('a').toString()
   } // ,
 
     // render: h => h(App)
@@ -34,9 +28,21 @@ new Vue({ // eslint-disable-line no-new
 //https://stackoverflow.com/a/52947649/1166518
 function splitLines(t) { return t.split(/\r\n|\r|\n/); }
 
+const removeCurrency = function(s) {
+    return s.trim().replace(new RegExp('USD$'), '').trim();
+}
 
 const processLocalBeancountRecordSingleLine = function(record) {
-    console.log(record);
+    if (!record) {
+        return;
+    }
+    var pos = record.search("open");
+    if (pos < 4) {
+        return;
+    }
+    var accountRaw = record.substr(pos + 4);
+    var account = removeCurrency(accountRaw);
+    console.log(account);
 }
 
 const processLocalBeancountRecord = function(records) {
