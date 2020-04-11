@@ -3,6 +3,7 @@
 // No need to be true/false
 import Vue from 'vue'
 /*import Arboreal from '@/../static/arboreal/lib/arboreal.js'*/
+import AccountLoader from '@/accountLoader.js'
 import Immutable from 'immutable'
 // import App from '@/components/App'
 //
@@ -64,6 +65,8 @@ new Vue({ // eslint-disable-line no-new
     methods: {
         loadBeancount(event) {
             var f;
+            let lo = new AccountLoader(event.target.files);
+            console.log(lo.status);
             for (var i=0, len=event.target.files.length; i<len; i++) {
                 let file = event.target.files[i];
                 console.log(file);
