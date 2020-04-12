@@ -8,18 +8,19 @@ export default class AccountLoader {
 
     get status() {
         console.log("in status");
-        return this.files.toString();
+        return this.files;
     }
 
     get accounts() {
         return this.extracted;
     }
 
-    process() {
+    process = async () => {
         for (var i=0; i<this.files.length; ++i) {
             let file = this.files[i];
-            this.fetchFileText(file, this);
+            await this.fetchFileText(file, this);
         }
+        this.files = [];
     }
 
 
