@@ -32,13 +32,7 @@ new Vue({ // eslint-disable-line no-new
         loadBeancount(event) {
             let lo = new AccountLoader(event.target.files);
             lo.process();
-            /*console.log(lo.status);*/
-            /*for (var i=0, len=event.target.files.length; i<len; i++) {*/
-            /*let file = event.target.files[i];*/
-            /*console.log(file);*/
-            /*fetchFileText(file);*/
-            /*}*/
-            //console.log(event.target.files);
+            console.log(lo.accounts);
         },
     },
   el: '#loadDir',

@@ -3,12 +3,16 @@
 export default class AccountLoader {
     constructor(files) {
         this.files = files;
+        this.extracted = []
     }
 
     get status() {
         console.log("in status");
-        console.log(this.files);
         return this.files.toString();
+    }
+
+    get accounts() {
+        return this.extracted;
     }
 
     process() {
@@ -33,7 +37,7 @@ export default class AccountLoader {
         }
         var accountRaw = record.substr(pos + 4);
         var account = AccountLoader.removeCurrency(accountRaw);
-        console.log(account);
+        this.extracted.push(account);
     }
 
     //https://stackoverflow.com/a/52947649/1166518
@@ -56,4 +60,3 @@ export default class AccountLoader {
 
 }
 
-/*export { AccountLoader };*/
