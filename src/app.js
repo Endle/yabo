@@ -19,7 +19,7 @@ new Vue({ // eslint-disable-line no-new
     // render: h => h(App)
 })
 
-new Vue({ // eslint-disable-line no-new
+var vmAccountList = new Vue({ // eslint-disable-line no-new
   el: '#currentAccounts',
   data: {
     beancountFileList: 'Nothing yet'
@@ -31,8 +31,11 @@ new Vue({ // eslint-disable-line no-new
     methods: {
         loadBeancount(event) {
             let lo = new AccountLoader(event.target.files);
-            lo.process().then(
-            console.log(lo.accounts));
+            lo.process().then(console.log(lo.accounts))
+                .then(
+                    vmAccountList.beancountFileList = lo.accounts
+                )
+            ;
         },
     },
   el: '#loadDir',
